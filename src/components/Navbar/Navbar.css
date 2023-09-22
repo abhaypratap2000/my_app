@@ -1,0 +1,89 @@
+nav {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 30px;
+    border-Bottom: '1px solid #ccc';
+
+  
+  }
+  
+  li {
+    display: inline;
+    margin-right: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    background: 'white';
+    margin: '0 10px';
+    list-style-type: 'none';
+    color: 'white';
+    background: 'white';
+    border-Bottom: '1px solid #ccc';
+  
+
+  }
+ 
+  
+  li:hover {
+    text-decoration: underline;
+  }
+
+  ul li a{
+    text-decoration: none;
+    color: #fff;
+    
+  }
+
+.dividerStyles{
+    color: hsl(0, 82%, 56%);
+    margin-left: 20px;
+  font-size: 20px !important;
+  }
+
+.logo{
+    height: 70px ;
+    width: 60px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.btn {
+  border-radius: 10px;
+  background-color: blueviolet;
+  color: #fff !important;
+  border-Bottom: none !important;
+  border-style: none !important;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  /* height: 22px; */
+
+}
+.SignUp{
+  border-radius: 10px;
+  background-color: blueviolet;
+  color: #fff !important;
+  border-Bottom: none !important;
+  border-style: none !important;
+}
+.SignUp a {
+  color: #fff !important;
+  border-style: none !important;
+  border-Bottom: none !important;
+  text-decoration: none !important;
+}
+/* .btn a{
+ 
+  color: #fff !important;
+  border-style: none !important;
+  border-Bottom: none !important;
+  text-decoration: none !important;
+} */
+.width {
+  width: 98px !important;
+
+}

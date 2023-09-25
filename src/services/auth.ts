@@ -1,8 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+
+const url = process.env.BASEURL
 export const authApi = createApi({
+   
     reducerPath:"authApi",
     baseQuery:fetchBaseQuery({
-        baseUrl:"http://127.0.01:3001/customer/",
+        baseUrl:url,
     }),
     endpoints:(builder)=>({
         loginUser:builder.mutation({
@@ -24,7 +27,7 @@ export const authApi = createApi({
             },
         }),
         OTPVerification:builder.mutation({
-            query:(body:{email:string;otp:string})=>{
+            query:(body:{email:string|null;otp:string})=>{
                 return {
                     url:'OTPverify',
                     method:"post",

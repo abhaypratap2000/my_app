@@ -1,23 +1,40 @@
-import React, { useState } from 'react';
-
+import React, {useState } from 'react';
+import { useOTPVerificationMutation } from '../../services/auth';
+import { selectAuth } from '../../app/slices/AuthSlice/authSlice';
+import {useAppSelector } from '../../Hooks/UsedTypeSelector'
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'
+const initialState = {
+  otp: ""
+}
 const OTPVerification: React.FC = () => {
-  const [otp, setOTP] = useState<string>('');
+  const [formValue, setFormValue] = useState(initialState);
+  const reduxemail = useAppSelector(selectAuth);
+  const navigate = useNavigate();
+  const { otp } = formValue;
 
-  const handleOTPChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOTP(e.target.value);
+  const [OTPVerification] = useOTPVerificationMutation();
+  const handleOTPChange = (e: any) => {
+    setFormValue({ ...formValue, [e.target.name]: e.target.value })
   };
-
-  const handleSubmit = (e: React.FormEvent) => {
+ const handleSubmit = async (e: any) => {
     e.preventDefault();
-    // Add logic to verify the OTP here
-    console.log(`Verifying OTP: ${otp}`);
+    let email = reduxemail.email;
+    let abc = { otp, email }
+    const {data}:any = await OTPVerification(abc)
+    //  console.log("Abhay",data)
+      if (data?.verified) {
+        await toast.success("OTP verified");
+        navigate("/signUp")
+      }else{
+        await toast.error("OTP verified");
+      }
+};
+const linkStyle = {
+    color: 'white',
+    textDecoration: 'none',
   };
-  const linkStyle = {
-    color: 'white', // Set the text color to white
-    textDecoration: 'none', // Remove underlines from links
-  };
-
-  return (
+return (
     <div className="vh-100 gradient-custom">
       <div className="row justify-content-center">
         <div className="col-md-6">
@@ -28,11 +45,12 @@ const OTPVerification: React.FC = () => {
                 Enter OTP
               </label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 id="otpInput"
                 placeholder="Enter OTP"
                 value={otp}
+                name="otp"
                 onChange={handleOTPChange}
                 required
               />
@@ -43,7 +61,7 @@ const OTPVerification: React.FC = () => {
           </form>
           <div className="mt-3">
             <p style={linkStyle}>
-              Didn't receive OTP? <a href="#"style={linkStyle}>Resend OTP</a>
+              Didn't receive OTP? <a href="#" style={linkStyle}>Resend OTP</a>
             </p>
           </div>
         </div>

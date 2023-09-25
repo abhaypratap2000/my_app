@@ -4,11 +4,13 @@ import { RootState } from '../../store';
 export interface AuthState{
     email:string | null;
     signature:string | null;
+    verified:string | null
 }
 
 const initialState :AuthState = {
     email:null,
-    signature:null
+    signature:null,
+    verified:null
 }
 
 export const authSlice = createSlice({
@@ -32,10 +34,21 @@ export const authSlice = createSlice({
             localStorage.clear();
             state.email = null;
             state.signature = null;
-        }
+        },
+        // otpvarification:(
+        //     state,
+        //     action:PayloadAction<{verified:string}>
+        // )=>{
+        //     localStorage.setItem(
+        //         "user",JSON.stringify({
+        //             verified:action.payload.verified
+        //         })
+        //     );
+        //     state.verified = action.payload.verified;
+        // }
     }
 })
 
 export const selectAuth = (state:RootState) => state.auth;
-export const {setUser , logout} = authSlice.actions;
+export const {setUser , logout } = authSlice.actions;
 export default authSlice.reducer;
